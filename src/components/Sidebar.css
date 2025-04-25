@@ -1,0 +1,25 @@
+.sidebar {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   width: 40vw;
+   background-color: #fff;
+   padding: 10px;
+   box-shadow: -2px 0px 3px gray;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.sb-group {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-bottom: 8px;
+}
+
+.sb-footer {
+   border-top: 1px solid gray;
+   padding-top: 10px;
+}
