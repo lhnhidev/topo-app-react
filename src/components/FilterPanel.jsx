@@ -28,6 +28,8 @@ export default function FilterPanel({
   selectedFilterItemId,
   setSelectedFilterItemId,
   todoList,
+  searchText,
+  setSearchText
 }) {
   const countByTodoList = useMemo(() => {
     return todoList.reduce(
@@ -55,6 +57,10 @@ export default function FilterPanel({
         className="filter-search"
         name="search-text"
         placeholder="Tìm kiếm"
+        value={searchText}
+        onChange={(e) => {
+          setSearchText(e.target.value);
+        }}
       />
       <div className="filter-main">
         {FILTER_ITEMS.map((item) => {

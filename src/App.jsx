@@ -35,6 +35,8 @@ function App() {
 
   const [selectedFilterItemId, setSelectedFilterItemId] = useState("all");
 
+  const [searchText, setSearchText] = useState("");
+
   const input = useRef();
 
   const activeTodoItem = todoList.find((todo) => todo.id === activeTodoItemId);
@@ -88,6 +90,10 @@ function App() {
 
   const filteredTodos = useMemo(() => {
     return todoList.filter((item) => {
+      if (!item.name.toLocaleLowerCase().includes(searchText.toLowerCase())) {
+        return false;
+      }
+
       switch (selectedFilterItemId) {
         case "all":
           return true;
@@ -101,7 +107,7 @@ function App() {
           return true;
       }
     });
-  }, [todoList, selectedFilterItemId]).map((item) => (
+  }, [todoList, selectedFilterItemId, searchText]).map((item) => (
     <TodoItem
       todoId={item.id}
       name={item.name}
@@ -119,6 +125,8 @@ function App() {
         selectedFilterItemId={selectedFilterItemId}
         setSelectedFilterItemId={setSelectedFilterItemId}
         todoList={todoList}
+        searchText={searchText}
+        setSearchText={setSearchText}
       ></FilterPanel>
       <div className="main-content">
         <input
