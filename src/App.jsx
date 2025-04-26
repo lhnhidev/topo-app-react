@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
@@ -7,21 +7,21 @@ import FilterPanel from "./components/FilterPanel";
 function App() {
   const [todoList, setTodoList] = useState([
     {
-      id: '1',
+      id: "1",
       name: "Đi học",
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
     },
     {
-      id: '2',
+      id: "2",
       name: "Chơi game",
       isImportant: true,
       isCompleted: true,
       isDeleted: false,
     },
     {
-      id: '3',
+      id: "3",
       name: "Mua sắm",
       isImportant: false,
       isCompleted: true,
@@ -86,8 +86,8 @@ function App() {
     setActiveTodoItemId(todoId);
   };
 
-  const filteredTodos = todoList
-    .filter((item) => {
+  const filteredTodos = useMemo(() => {
+    return todoList.filter((item) => {
       switch (selectedFilterItemId) {
         case "all":
           return true;
@@ -100,18 +100,18 @@ function App() {
         default:
           return true;
       }
-    })
-    .map((item) => (
-      <TodoItem
-        todoId={item.id}
-        name={item.name}
-        isImportant={item.isImportant}
-        isCompleted={item.isCompleted}
-        key={item.id}
-        handleCompleteCheckboxChange={handleCompleteCheckboxChange}
-        handleShowSidebar={handleShowSidebar}
-      ></TodoItem>
-    ));
+    });
+  }, [todoList, selectedFilterItemId]).map((item) => (
+    <TodoItem
+      todoId={item.id}
+      name={item.name}
+      isImportant={item.isImportant}
+      isCompleted={item.isCompleted}
+      key={item.id}
+      handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+      handleShowSidebar={handleShowSidebar}
+    ></TodoItem>
+  ));
 
   return (
     <div className="container">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./FilterPanel.css";
 
 const FILTER_ITEMS = [
@@ -29,23 +29,24 @@ export default function FilterPanel({
   setSelectedFilterItemId,
   todoList,
 }) {
-
-  const countByTodoList = todoList.reduce(
-    (acc, item) => {
-      let newAcc = {...acc};
-      if (item.isCompleted) {
-        newAcc = {...newAcc, completed: newAcc.completed + 1};
-      }
-      if (item.isDeleted) {
-        newAcc = {...newAcc, deleted: newAcc.deleted + 1};
-      }
-      if (item.isImportant) {
-        newAcc = {...newAcc, important: newAcc.important + 1};
-      }
-      return newAcc;
-    },
-    { all: todoList.length, important: 0, completed: 0, deleted: 0 }
-  );
+  const countByTodoList = useMemo(() => {
+    return todoList.reduce(
+      (acc, item) => {
+        let newAcc = { ...acc };
+        if (item.isCompleted) {
+          newAcc = { ...newAcc, completed: newAcc.completed + 1 };
+        }
+        if (item.isDeleted) {
+          newAcc = { ...newAcc, deleted: newAcc.deleted + 1 };
+        }
+        if (item.isImportant) {
+          newAcc = { ...newAcc, important: newAcc.important + 1 };
+        }
+        return newAcc;
+      },
+      { all: todoList.length, important: 0, completed: 0, deleted: 0 }
+    );
+  }, [todoList]);
 
   return (
     <div className="filter-panel">
