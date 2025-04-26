@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import "./FilterPanel.css";
+import FilterList from "./FilterList";
+import Category from "./Category";
 
 const FILTER_ITEMS = [
   {
@@ -62,29 +64,13 @@ export default function FilterPanel({
           setSearchText(e.target.value);
         }}
       />
-      <div className="filter-main">
-        {FILTER_ITEMS.map((item) => {
-          return (
-            <div
-              className={`filter-item ${
-                selectedFilterItemId === item.id ? "selected" : ""
-              }`}
-              onClick={() => setSelectedFilterItemId(item.id)}
-              key={item.id}
-            >
-              <div className="filter-name">
-                <img
-                  src={item.iconPath}
-                  alt={item.label + " logo"}
-                  style={{ width: "30px", height: "30px" }}
-                />
-                <p>{item.label}</p>
-              </div>
-              <p>{countByTodoList[item.id]}</p>
-            </div>
-          );
-        })}
-      </div>
+      <FilterList
+        FILTER_ITEMS={FILTER_ITEMS}
+        selectedFilterItemId={selectedFilterItemId}
+        countByTodoList={countByTodoList}
+        setSelectedFilterItemId={setSelectedFilterItemId}
+      ></FilterList>
+      <Category todoList={todoList}></Category>
     </div>
   );
 }

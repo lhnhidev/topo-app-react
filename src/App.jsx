@@ -12,6 +12,10 @@ function App() {
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
+      isPersonal: true,
+      isCompany: false,
+      isTravel: true,
+      isIdea: false
     },
     {
       id: "2",
@@ -19,6 +23,10 @@ function App() {
       isImportant: true,
       isCompleted: true,
       isDeleted: false,
+      isPersonal: true,
+      isCompany: false,
+      isTravel: true,
+      isIdea: false
     },
     {
       id: "3",
@@ -26,6 +34,10 @@ function App() {
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
+      isPersonal: true,
+      isCompany: false,
+      isTravel: true,
+      isIdea: false
     },
   ]);
 
@@ -51,6 +63,10 @@ function App() {
           name: value,
           isCompleted: false,
           isImportant: false,
+          isPersonal: false,
+          isCompany: false,
+          isTravel: false,
+          isIdea: false
         },
       ]);
       input.current.value = "";
