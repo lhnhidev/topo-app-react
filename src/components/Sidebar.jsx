@@ -14,15 +14,13 @@ export default function Sidebar({
     setName(e.target.value);
   };
 
-  const handleIsImportant = (e) => {
+  const handleIsImportant = () => {
     setIsImportant(!isImportant);
   };
 
-  const handleIsCompleted = (e) => {
+  const handleIsCompleted = () => {
     setIsCompleted(!isCompleted);
   };
-
-  const handleSave = () => {};
 
   return (
     <div className="sidebar">

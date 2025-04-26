@@ -7,21 +7,21 @@ import FilterPanel from "./components/FilterPanel";
 function App() {
   const [todoList, setTodoList] = useState([
     {
-      id: 1,
+      id: '1',
       name: "Đi học",
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
     },
     {
-      id: 2,
+      id: '2',
       name: "Chơi game",
       isImportant: true,
       isCompleted: true,
       isDeleted: false,
     },
     {
-      id: 3,
+      id: '3',
       name: "Mua sắm",
       isImportant: false,
       isCompleted: true,
@@ -86,7 +86,7 @@ function App() {
     setActiveTodoItemId(todoId);
   };
 
-  const todos = todoList
+  const filteredTodos = todoList
     .filter((item) => {
       switch (selectedFilterItemId) {
         case "all":
@@ -118,6 +118,7 @@ function App() {
       <FilterPanel
         selectedFilterItemId={selectedFilterItemId}
         setSelectedFilterItemId={setSelectedFilterItemId}
+        todoList={todoList}
       ></FilterPanel>
       <div className="main-content">
         <input
@@ -128,7 +129,7 @@ function App() {
           placeholder="Thêm công việc"
           onKeyDown={handleKeyDown}
         ></input>
-        <div>{todos}</div>
+        <div>{filteredTodos}</div>
 
         {showSidebar && (
           <Sidebar
