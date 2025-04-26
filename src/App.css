@@ -3,6 +3,12 @@ body {
 }
 
 .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content {
+  flex-grow: 2;
   padding: 30px;
   background-color: #f0f0f0;
 }

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
+import FilterPanel from "./components/FilterPanel";
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -79,24 +80,27 @@ function App() {
 
   return (
     <div className="container">
-      <input
-        ref={input}
-        className="input-new-task"
-        type="text"
-        name="add-new-task"
-        placeholder="Thêm công việc"
-        onKeyDown={handleKeyDown}
-      ></input>
-      <div>{todos}</div>
+      <FilterPanel></FilterPanel>
+      <div className="main-content">
+        <input
+          ref={input}
+          className="input-new-task"
+          type="text"
+          name="add-new-task"
+          placeholder="Thêm công việc"
+          onKeyDown={handleKeyDown}
+        ></input>
+        <div>{todos}</div>
 
-      {showSidebar && (
-        <Sidebar
-          key={activeTodoItem.id}
-          todo={activeTodoItem}
-          setShowSidebar={setShowSidebar}
-          handleChangeTodoItem={handleChangeTodoItem}
-        ></Sidebar>
-      )}
+        {showSidebar && (
+          <Sidebar
+            key={activeTodoItem.id}
+            todo={activeTodoItem}
+            setShowSidebar={setShowSidebar}
+            handleChangeTodoItem={handleChangeTodoItem}
+          ></Sidebar>
+        )}
+      </div>
     </div>
   );
 }
