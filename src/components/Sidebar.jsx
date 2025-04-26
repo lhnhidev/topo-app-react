@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Sidebar.css";
 import { CATEGORY_ITEMS } from "./constants";
+import { AppContext } from "./context/AppContext";
 
-export default function Sidebar({
-  todo,
-  handleChangeTodoItem,
-  setShowSidebar,
-}) {
-  const [name, setName] = useState(todo.name);
-  const [isImportant, setIsImportant] = useState(todo.isImportant);
-  const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
-  const [category, setCategory] = useState(todo.category);
+export default function Sidebar() {
+  const { activeTodoItem, handleChangeTodoItem, setShowSidebar } = useContext(AppContext);
+
+  const [name, setName] = useState(activeTodoItem.name);
+  const [isImportant, setIsImportant] = useState(activeTodoItem.isImportant);
+  const [isCompleted, setIsCompleted] = useState(activeTodoItem.isCompleted);
+  const [category, setCategory] = useState(activeTodoItem.category);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -71,10 +70,7 @@ export default function Sidebar({
             >
               {CATEGORY_ITEMS.map((item) => {
                 return (
-                  <option 
-                    value={item.id} 
-                    key={item.id}
-                  >
+                  <option value={item.id} key={item.id}>
                     {item.label}
                   </option>
                 );
@@ -88,7 +84,12 @@ export default function Sidebar({
           style={{ padding: "3px 6px", margin: "0px 4px" }}
           onClick={() => {
             setShowSidebar(false);
-            handleChangeTodoItem(todo.id, { name, isCompleted, isImportant, category });
+            handleChangeTodoItem(activeTodoItem.id, {
+              name,
+              isCompleted,
+              isImportant,
+              category,
+            });
           }}
         >
           Save

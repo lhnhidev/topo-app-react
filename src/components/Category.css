@@ -2,3 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.category.selected {
+  background-color: #0f548c;
+  color: #fff;
+}

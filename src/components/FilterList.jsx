@@ -1,11 +1,12 @@
-import './FilterList.css';
-import { FILTER_ITEMS } from './constants';
+import { useContext } from "react";
+import "./FilterList.css";
+import { FILTER_ITEMS } from "./constants";
+import { AppContext } from "./context/AppContext";
 
-export default function FilterList({
-  selectedFilterItemId,
-  setSelectedFilterItemId,
-  countByTodoList,
-}) {
+export default function FilterList() {
+  const { selectedFilterItemId, setSelectedFilterItemId, countByTodoList } =
+    useContext(AppContext);
+
   return (
     <div className="filter-main">
       {FILTER_ITEMS.map((item) => {

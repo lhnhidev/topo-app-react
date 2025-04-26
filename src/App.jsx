@@ -1,137 +1,17 @@
-import { useMemo, useRef, useState } from "react";
+import { useContext } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
 import FilterPanel from "./components/FilterPanel";
+import { AppContext } from "./components/context/AppContext";
 
 function App() {
-  const [todoList, setTodoList] = useState([
-    {
-      id: "1",
-      name: "Đi học",
-      isImportant: false,
-      isCompleted: true,
-      isDeleted: false,
-      category: "personal"
-    },
-    {
-      id: "2",
-      name: "Chơi game",
-      isImportant: true,
-      isCompleted: true,
-      isDeleted: false,
-      category: "company"
-    },
-    {
-      id: "3",
-      name: "Mua sắm",
-      isImportant: false,
-      isCompleted: true,
-      isDeleted: false,
-      category: "personal"
-    },
-  ]);
-
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const [activeTodoItemId, setActiveTodoItemId] = useState();
-
-  const [selectedFilterItemId, setSelectedFilterItemId] = useState("all");
-
-  const [searchText, setSearchText] = useState("");
-
-  const input = useRef();
-
-  const activeTodoItem = todoList.find((todo) => todo.id === activeTodoItemId);
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      const value = e.target.value;
-      setTodoList([
-        ...todoList,
-        {
-          id: crypto.randomUUID(),
-          name: value,
-          isCompleted: false,
-          isImportant: false,
-          category: "personal"
-        },
-      ]);
-      input.current.value = "";
-    }
-  };
-
-  const handleCompleteCheckboxChange = (todoId) => {
-    const newTodoList = todoList.map((item) => {
-      if (item.id === todoId) {
-        return {
-          ...item,
-          isCompleted: !item.isCompleted,
-        };
-      }
-      return item;
-    });
-    setTodoList(newTodoList);
-  };
-
-  const handleChangeTodoItem = (todoId, newInfo) => {
-    const newTodoList = todoList.map((item) => {
-      if (item.id === todoId) {
-        return {
-          ...item,
-          ...newInfo,
-        };
-      }
-      return item;
-    });
-    setTodoList(newTodoList);
-  };
-
-  const handleShowSidebar = (todoId) => {
-    setShowSidebar(true);
-    setActiveTodoItemId(todoId);
-  };
-
-  const filteredTodos = useMemo(() => {
-    return todoList.filter((item) => {
-      if (!item.name.toLocaleLowerCase().includes(searchText.toLowerCase())) {
-        return false;
-      }
-
-      switch (selectedFilterItemId) {
-        case "all":
-          return true;
-        case "important":
-          return item.isImportant;
-        case "completed":
-          return item.isCompleted;
-        case "deleted":
-          return item.isDeleted;
-        default:
-          return true;
-      }
-    });
-  }, [todoList, selectedFilterItemId, searchText]).map((item) => (
-    <TodoItem
-      todoId={item.id}
-      name={item.name}
-      isImportant={item.isImportant}
-      isCompleted={item.isCompleted}
-      key={item.id}
-      handleCompleteCheckboxChange={handleCompleteCheckboxChange}
-      handleShowSidebar={handleShowSidebar}
-    ></TodoItem>
-  ));
+  const { input, showSidebar, activeTodoItem, handleKeyDown, filteredTodos } =
+    useContext(AppContext);
 
   return (
     <div className="container">
-      <FilterPanel
-        selectedFilterItemId={selectedFilterItemId}
-        setSelectedFilterItemId={setSelectedFilterItemId}
-        todoList={todoList}
-        searchText={searchText}
-        setSearchText={setSearchText}
-      ></FilterPanel>
+      <FilterPanel></FilterPanel>
       <div className="main-content">
         <input
           ref={input}
@@ -141,16 +21,19 @@ function App() {
           placeholder="Thêm công việc"
           onKeyDown={handleKeyDown}
         ></input>
-        <div>{filteredTodos}</div>
+        <div>
+          {filteredTodos.map((item) => (
+            <TodoItem
+              todoId={item.id}
+              name={item.name}
+              isImportant={item.isImportant}
+              isCompleted={item.isCompleted}
+              key={item.id}
+            ></TodoItem>
+          ))}
+        </div>
 
-        {showSidebar && (
-          <Sidebar
-            key={activeTodoItem.id}
-            todo={activeTodoItem}
-            setShowSidebar={setShowSidebar}
-            handleChangeTodoItem={handleChangeTodoItem}
-          ></Sidebar>
-        )}
+        {showSidebar && <Sidebar key={activeTodoItem.id}></Sidebar>}
       </div>
     </div>
   );

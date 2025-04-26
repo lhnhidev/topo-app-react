@@ -1,33 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useContext } from "react";
 import "./FilterPanel.css";
 import FilterList from "./FilterList";
 import Category from "./Category";
+import { AppContext } from "./context/AppContext";
 
-export default function FilterPanel({
-  selectedFilterItemId,
-  setSelectedFilterItemId,
-  todoList,
-  searchText,
-  setSearchText
-}) {
-  const countByTodoList = useMemo(() => {
-    return todoList.reduce(
-      (acc, item) => {
-        let newAcc = { ...acc };
-        if (item.isCompleted) {
-          newAcc = { ...newAcc, completed: newAcc.completed + 1 };
-        }
-        if (item.isDeleted) {
-          newAcc = { ...newAcc, deleted: newAcc.deleted + 1 };
-        }
-        if (item.isImportant) {
-          newAcc = { ...newAcc, important: newAcc.important + 1 };
-        }
-        return newAcc;
-      },
-      { all: todoList.length, important: 0, completed: 0, deleted: 0 }
-    );
-  }, [todoList]);
+export default function FilterPanel() {
+  const { searchText, setSearchText } = useContext(AppContext);
 
   return (
     <div className="filter-panel">
@@ -41,12 +19,8 @@ export default function FilterPanel({
           setSearchText(e.target.value);
         }}
       />
-      <FilterList
-        selectedFilterItemId={selectedFilterItemId}
-        countByTodoList={countByTodoList}
-        setSelectedFilterItemId={setSelectedFilterItemId}
-      ></FilterList>
-      <Category todoList={todoList}></Category>
+      <FilterList></FilterList>
+      <Category></Category>
     </div>
   );
 }
