@@ -16,3 +16,8 @@
   border-radius: 5px;
   padding: 5px;
 }
+
+.filter-item.selected {
+  background-color: #0f548c;
+  color: #fff;
+}

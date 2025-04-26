@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FilterPanel.css";
 
 const FILTER_ITEMS = [
@@ -24,7 +24,8 @@ const FILTER_ITEMS = [
   },
 ];
 
-export default function FilterPanel() {
+export default function FilterPanel({ selectedFilterItemId, setSelectedFilterItemId }) {
+
   return (
     <div className="filter-panel">
       <input
@@ -36,11 +37,17 @@ export default function FilterPanel() {
       <div className="filter-main">
         {FILTER_ITEMS.map((item) => {
           return (
-            <div className="filter-item">
+            <div
+              className={`filter-item ${
+                selectedFilterItemId === item.id ? "selected" : ""
+              }`}
+              onClick={() => setSelectedFilterItemId(item.id)}
+              key={item.id}
+            >
               <div className="filter-name">
                 <img
                   src={item.iconPath}
-                  alt={item.label + ' logo'}
+                  alt={item.label + " logo"}
                   style={{ width: "30px", height: "30px" }}
                 />
                 <p>{item.label}</p>
