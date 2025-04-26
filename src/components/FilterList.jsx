@@ -1,7 +1,7 @@
 import './FilterList.css';
+import { FILTER_ITEMS } from './constants';
 
 export default function FilterList({
-  FILTER_ITEMS,
   selectedFilterItemId,
   setSelectedFilterItemId,
   countByTodoList,

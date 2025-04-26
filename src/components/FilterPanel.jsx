@@ -3,29 +3,6 @@ import "./FilterPanel.css";
 import FilterList from "./FilterList";
 import Category from "./Category";
 
-const FILTER_ITEMS = [
-  {
-    id: "all",
-    label: "All",
-    iconPath: "./public/warehouse.png",
-  },
-  {
-    id: "important",
-    label: "Important",
-    iconPath: "./public/flag.png",
-  },
-  {
-    id: "completed",
-    label: "Completed",
-    iconPath: "./public/check.png",
-  },
-  {
-    id: "deleted",
-    label: "Deleted",
-    iconPath: "./public/trash.png",
-  },
-];
-
 export default function FilterPanel({
   selectedFilterItemId,
   setSelectedFilterItemId,
@@ -65,7 +42,6 @@ export default function FilterPanel({
         }}
       />
       <FilterList
-        FILTER_ITEMS={FILTER_ITEMS}
         selectedFilterItemId={selectedFilterItemId}
         countByTodoList={countByTodoList}
         setSelectedFilterItemId={setSelectedFilterItemId}

@@ -12,10 +12,7 @@ function App() {
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
-      isPersonal: true,
-      isCompany: false,
-      isTravel: true,
-      isIdea: false
+      category: "personal"
     },
     {
       id: "2",
@@ -23,10 +20,7 @@ function App() {
       isImportant: true,
       isCompleted: true,
       isDeleted: false,
-      isPersonal: true,
-      isCompany: false,
-      isTravel: true,
-      isIdea: false
+      category: "company"
     },
     {
       id: "3",
@@ -34,10 +28,7 @@ function App() {
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
-      isPersonal: true,
-      isCompany: false,
-      isTravel: true,
-      isIdea: false
+      category: "personal"
     },
   ]);
 
@@ -63,10 +54,7 @@ function App() {
           name: value,
           isCompleted: false,
           isImportant: false,
-          isPersonal: false,
-          isCompany: false,
-          isTravel: false,
-          isIdea: false
+          category: "personal"
         },
       ]);
       input.current.value = "";
