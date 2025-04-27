@@ -26,7 +26,7 @@ export default function FilterList() {
               />
               <p>{item.label}</p>
             </div>
-            <p>{countByTodoList[item.id]}</p>
+            <p className="filter-amount">{countByTodoList[item.id]}</p>
           </div>
         );
       })}

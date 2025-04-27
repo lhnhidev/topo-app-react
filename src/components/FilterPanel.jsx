@@ -13,7 +13,7 @@ export default function FilterPanel() {
         type="text"
         className="filter-search"
         name="search-text"
-        placeholder="Tìm kiếm"
+        placeholder="🔍 Tìm kiếm"
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value);

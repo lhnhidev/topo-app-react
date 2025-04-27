@@ -33,8 +33,17 @@ export default function Category() {
   }, [todoList]);
 
   return (
-    <>
-      <p>Categories</p>
+    <div style={{ marginTop: "50px" }}>
+      <p
+        style={{
+          fontSize: "20px",
+          color: "#8d8d8d",
+          fontWeight: "600",
+          marginBottom: "12px",
+        }}
+      >
+        Categories
+      </p>
       {CATEGORY_ITEMS.map((item) => {
         return (
           <div
@@ -43,12 +52,23 @@ export default function Category() {
             key={item.id}
           >
             <div className="category-item">
-              <p className="category-name">{item.label}</p>
-              <p>{countByCategories[item.id]}</p>
+              <div
+                style={{
+                  display: "flex",
+                  alignContent: "center",
+                  fontSize: "16px",
+                }}
+              >
+                <span style={{ marginRight: "5px" }}>📂</span>
+                <p style={{ lineHeight: "1.7" }}>{item.label}</p>
+              </div>
+              <p style={{ fontSize: "16px", lineHeight: "1.7" }}>
+                {countByCategories[item.id]}
+              </p>
             </div>
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

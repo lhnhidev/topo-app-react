@@ -5,12 +5,18 @@ body {
 .container {
   display: flex;
   justify-content: space-between;
+  width: 1140px;
+  height: 100vh;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
 }
 
 .main-content {
   flex-grow: 2;
   padding: 30px;
   background-color: #f0f0f0;
+  overflow: auto;
 }
 
 .todo-item-text {
@@ -26,6 +32,18 @@ body {
   width: 100%;
   border-radius: 3px;
   margin-bottom: 8px;
+}
+
+.todo-item:hover {
+  background-color: #1c8be6;
+  cursor: pointer;
+  color: #fff;
+}
+
+.input-new-task {
+  padding: 16px;  
+  font-size: 18px;
+  margin-bottom: 16px;
 }
 
 .todo-item {

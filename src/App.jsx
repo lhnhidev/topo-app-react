@@ -21,6 +21,7 @@ function App() {
           placeholder="Thêm công việc"
           onKeyDown={handleKeyDown}
         ></input>
+        <hr style={{ marginBottom: "16px" }} />
         <div>
           {filteredTodos.map((item) => (
             <TodoItem
